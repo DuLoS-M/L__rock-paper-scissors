@@ -50,23 +50,20 @@ function playRound(playerSelection, computerSelection){
 function game() {
     let playerScore = 0;
     let computerScore = 0;
-    
+
 
     for (let i = 0; i < 5; i++) { 
         let playerMove = prompt('Choose a move');
         let roundResult = playRound(playerMove, getComputerChoice());
 
         if (roundResult.startsWith('You win!')) {
-            playerScore++ 
+            playerScore++;
         } else if (roundResult.startsWith('You lose!')) {
-            computerScore++
+            computerScore++;
         }
 
-        console.log(`${roundResult} \n --- \n The score is: \n You: ${playerScore} | CPU ${computerScore}`)
-
-
-
+        console.log(`${roundResult} \n --- \n The score is: \n You: ${playerScore} | CPU ${computerScore}`);
     }
 }
 
-game()
+game();
