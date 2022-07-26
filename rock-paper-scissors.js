@@ -4,66 +4,95 @@ function getComputerChoice(){
     return possible_choices[choice];
 }
 
+let playerScore = 0
+let computerScore = 0
+
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase();
+    const resultsDiv = document.querySelector('#results')
+    const scoreDiv = document.querySelector('#score')
+    const finalResultDiv = document.querySelector('#final_result')
+    
+    // reset the final result text for a new match
+    if (finalResultDiv.textContent !== '') finalResultDiv.textContent = ''
+    
     switch(true) {
 
         case (playerSelection === "rock") && (computerSelection === 'rock'):
-            return "I'ts a tie!";
+            resultsDiv.textContent =  "I'ts a tie!";
             break;
         
         case (playerSelection === "rock") && (computerSelection === 'paper'):
-            return 'You lose!, paper beats rock';
+            resultsDiv.textContent =  'You lose!, paper beats rock';
+            computerScore ++
             break;
 
         case (playerSelection === "rock") && (computerSelection === 'scissors'):
-            return 'You win!, rock beats scissors';
+            resultsDiv.textContent =  'You win!, rock beats scissors';
+            playerScore ++
             break;
             
         case (playerSelection === "paper") && (computerSelection === 'rock'):
-            return 'You win!, paper beats rock';
+            resultsDiv.textContent =  'You win!, paper beats rock';
+            playerScore ++
             break;
 
         case (playerSelection === "paper") && (computerSelection ==='paper'):
-            return "It's a tie!";
+            resultsDiv.textContent =  "It's a tie!";
             break;
 
         case (playerSelection === "paper") && (computerSelection ==='scissors'):
-            return "You lose!, scissors beat paper";
+            resultsDiv.textContent =  "You lose!, scissors beat paper";
+            computerScore ++
             break;
 
         case (playerSelection === "scissors") && (computerSelection ==='rock'):
-            return "You lose!, rock beats scissors";
+            resultsDiv.textContent =  "You lose!, rock beats scissors";
+            computerScore ++
             break;
 
         case (playerSelection === "scissors") && (computerSelection ==='paper'):
-            return "You win!, scissors beat paper";
+            resultsDiv.textContent =  "You win!, scissors beat paper";
+            playerScore ++
             break;
 
         case (playerSelection === "scissors") && (computerSelection ==='scissors'):
-            return "It's a tie!";
+            resultsDiv.textContent =  "It's a tie!";
             break;
+    }
+
+    // Display current score
+    scoreDiv.textContent = `Your score :${playerScore}  |  CPU: ${computerScore}`
+
+    // Check for winner
+    if (playerScore === 5) {
+        finalResultDiv.textContent = 'You won!.'
+        // Reset the score
+        playerScore = 0 
+        computerScore = 0
+
+    } else if (computerScore === 5) {
+        finalResultDiv.textContent = 'You lost.'
+        // Reset the score
+        playerScore = 0
+        computerScore = 0
     }
         
 }
 
-function game() {
-    let playerScore = 0;
-    let computerScore = 0;
 
 
-    for (let i = 0; i < 5; i++) { 
-        let playerMove = prompt('Choose a move');
-        let roundResult = playRound(playerMove, getComputerChoice());
+const btn_rock = document.querySelector('#rock');
+btn_rock.addEventListener('click', () => {
+    playRound('rock', getComputerChoice())
+})
 
-        if (roundResult.startsWith('You win!')) {
-            playerScore++;
-        } else if (roundResult.startsWith('You lose!')) {
-            computerScore++;
-        }
+const btn_paper = document.querySelector('#paper');
+btn_paper.addEventListener('click', () => {
+    playRound('paper', getComputerChoice())
+})
 
-        console.log(`${roundResult} \n --- \n The score is: \n You: ${playerScore} | CPU ${computerScore}`);
-    }
-}
+const btn_scissors = document.querySelector('#scissors');
+btn_scissors.addEventListener('click', () => {
+    playRound('scissors', getComputerChoice())
+})
 
-game();
