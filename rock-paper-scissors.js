@@ -4,16 +4,16 @@ function getComputerChoice(){
     return possible_choices[choice];
 }
 
-let playerScore = 0
-let computerScore = 0
+let playerScore = 0;
+let computerScore = 0;
 
 function playRound(playerSelection, computerSelection){
-    const resultsDiv = document.querySelector('#results')
-    const scoreDiv = document.querySelector('#score')
-    const finalResultDiv = document.querySelector('#final_result')
+    const resultsDiv = document.querySelector('#results');
+    const scoreDiv = document.querySelector('#score');
+    const finalResultDiv = document.querySelector('#final_result');
     
     // reset the final result text for a new match
-    if (finalResultDiv.textContent !== '') finalResultDiv.textContent = ''
+    if (finalResultDiv.textContent !== '') finalResultDiv.textContent = '';
     
     switch(true) {
 
@@ -61,20 +61,20 @@ function playRound(playerSelection, computerSelection){
     }
 
     // Display current score
-    scoreDiv.textContent = `Your score :${playerScore}  |  CPU: ${computerScore}`
+    scoreDiv.textContent = `Your score :${playerScore}  |  CPU: ${computerScore}`;
 
     // Check for winner
     if (playerScore === 5) {
-        finalResultDiv.textContent = 'You won!.'
+        finalResultDiv.textContent = 'You won!.';
         // Reset the score
-        playerScore = 0 
-        computerScore = 0
+        playerScore = 0 ;
+        computerScore = 0;
 
     } else if (computerScore === 5) {
-        finalResultDiv.textContent = 'You lost.'
+        finalResultDiv.textContent = 'You lost.';
         // Reset the score
-        playerScore = 0
-        computerScore = 0
+        playerScore = 0;
+        computerScore = 0;
     }
         
 }
@@ -88,11 +88,11 @@ btn_rock.addEventListener('click', () => {
 
 const btn_paper = document.querySelector('#paper');
 btn_paper.addEventListener('click', () => {
-    playRound('paper', getComputerChoice())
+    playRound('paper', getComputerChoice());
 })
 
 const btn_scissors = document.querySelector('#scissors');
 btn_scissors.addEventListener('click', () => {
-    playRound('scissors', getComputerChoice())
+    playRound('scissors', getComputerChoice());
 })
 
